@@ -1,0 +1,23 @@
+[
+  { 
+    "title": "Sr. Front End Developer", 
+    "company_name": "Famous Allstars",
+    "location": "Jakarta, Indonesia",
+    "time": "2021 - 2024",
+    "job_desc": "<ul><li>Working closely with BE engineers to develop both in-house and clients' web applications or websites.</li><li>Providing guidance and troubleshooting for our team on FE related issues.</li><li>Maintaining and updating internal platforms to meet the business needs.</li><li>Code reviewing & testing staff's work</li></ul>"
+  },
+  { 
+    "title": "Front End Developer", 
+    "company_name": "Wunderman Thompson Indonesia (formerly Mirum Agency)",
+    "location": "Jakarta, Indonesia",
+    "time": "2015 - 2021",
+    "job_desc": "<ul><li>Bringing our clients' website designs to life using HTML, CSS & JavaScript and its frameworks.</li><li>Monitoring clients' websites to ensure they are working as expected during campaign.</li><li>Recommending solutions for a streamlined, responsive interface with the design team.</li><li>Communicating technical issues in an understandable manner to our internal team</li></ul>"
+  },
+  { 
+    "title": "Web Designer & Developer", 
+    "company_name": "PT ValueStream International",
+    "location": "Bandung, Indonesia",
+    "time": "2012 - 2015",
+    "job_desc": "<ul><li>Creating and maintaining CMS-based company profile & product websites.</li><li>Designing prototype and user interface for our client's mobile apps.</li><li>Designing catalogs, banners, logos, and other printed materials for promotions and advertisements</li></ul>"
+  }
+]
