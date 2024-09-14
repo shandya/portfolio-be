@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import fs from 'node:fs/promises';
 import bodyParser from 'body-parser';
+import path from 'path';
 
 dotenv.config();
 
@@ -34,7 +35,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get('/api/works', async (req, res) => {
-  const fileContent = await fs.readFile(process.cwd() + '/data/works.json', 'utf8');
+  const fileContent = await fs.readFile(path.join(process.cwd(), '/data/works.json'), 'utf8');
 
   const worksData: Works[] = JSON.parse(fileContent.toString());
 
@@ -42,7 +43,7 @@ app.get('/api/works', async (req, res) => {
 });
 
 app.get('/api/portfolio', async (req, res) => {
-  const fileContent = await fs.readFile(process.cwd() + '/data/portfolio.json', 'utf8');
+  const fileContent = await fs.readFile(path.join(process.cwd(), '/data/portfolio.json'), 'utf8');
 
   const portfolioData: Portfolio[] = JSON.parse(fileContent.toString());
 
