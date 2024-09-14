@@ -24,12 +24,12 @@ app.get("/", (req, res) => {
     res.send("Express + TypeScript Server");
 });
 app.get('/api/works', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const fileContent = yield promises_1.default.readFile('./data/works.json');
+    const fileContent = yield promises_1.default.readFile(process.cwd() + '/data/works.json', 'utf8');
     const worksData = JSON.parse(fileContent.toString());
     res.status(200).json({ works: worksData });
 }));
 app.get('/api/portfolio', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const fileContent = yield promises_1.default.readFile('./data/portfolio.json');
+    const fileContent = yield promises_1.default.readFile(process.cwd() + '/data/portfolio.json', 'utf8');
     const portfolioData = JSON.parse(fileContent.toString());
     res.status(200).json({ works: portfolioData });
 }));
