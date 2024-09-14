@@ -34,7 +34,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get('/api/works', async (req, res) => {
-  const fileContent = await fs.readFile('./data/works.json');
+  const fileContent = await fs.readFile(process.cwd() + '/data/works.json', 'utf8');
 
   const worksData: Works[] = JSON.parse(fileContent.toString());
 
@@ -42,7 +42,7 @@ app.get('/api/works', async (req, res) => {
 });
 
 app.get('/api/portfolio', async (req, res) => {
-  const fileContent = await fs.readFile('./data/portfolio.json');
+  const fileContent = await fs.readFile(process.cwd() + '/data/portfolio.json', 'utf8');
 
   const portfolioData: Portfolio[] = JSON.parse(fileContent.toString());
 
