@@ -1,6 +1,66 @@
 [
+  {
+      "name": "Akasia Admin Portal",
+      "tags": "Javascript, Angular, Typescript, Tailwind, REST API",
+      "external_url": "",
+      "description": "Built an admin portal for Akasia365 using Angular and TypeScript, featuring role-based access control, dynamic dashboards, and seamless REST API integration with a responsive Tailwind CSS interface.",
+      "year": "2026",
+      "highlight": true,
+      "client": "Akasia365",
+      "made_at": "Sobat Bisnis"
+    },
     {
-      "name": "Indosat Collabonation", 
+      "name": "Biomedilab",
+      "tags": "Javascript, Angular, Typescript, Tailwind, REST API",
+      "external_url": "",
+      "description": "Built an admin portal for Biomedilab using Angular and TypeScript, featuring role-based access control, dynamic dashboards, and seamless REST API integration with a responsive Tailwind CSS interface.",
+      "year": "2025-2026",
+      "highlight": true,
+      "client": "Biomedilab",
+      "made_at": "Sobat Bisnis"
+    },
+    {
+      "name": "Magpie",
+      "tags": "Javascript, React, Tailwind, Chakra UI, CSS3, REST API",
+      "external_url": "",
+      "description": "Developed Magpie, a web application for managing and tracking inventory and assets.",
+      "year": "2025-2026",
+      "highlight": true,
+      "client": "Paragoncorp",
+      "made_at": "Sobat Bisnis"
+    },
+    {
+      "name": "Spectrum Company Profile Revamp",
+      "tags": "Javascript, React, NextJS, Tailwind, CSS3, REST API",
+      "external_url": "https://www.spectrum-unitec.com",
+      "description": "Developed Spectrum Unitec company profile, an Indonesian commercial and industrial solutions company.",
+      "year": "2025",
+      "highlight": true,
+      "client": "SAGA",
+      "made_at": ""
+    },
+    {
+      "name": "Kintaka Web Development",
+      "tags": "Javascript, React, NextJS, Headless CMS, Tailwind, CSS3, REST API",
+      "external_url": "https://kintaka.co.id/",
+      "description": "Developed Kintaka, ",
+      "year": "2025",
+      "highlight": true,
+      "client": "Vektor Inti Prima",
+      "made_at": ""
+    },
+    {
+      "name": "BIONS Middle Office",
+      "tags": "Javascript, React, Bootstrap, CSS3, REST API, Microfrontend",
+      "external_url": "",
+      "description": "Developed and maintained Middle Office CMS modules for the company mobile app using React.js.",
+      "year": "2024-2025",
+      "highlight": true,
+      "client": "BNI Sekuritas",
+      "made_at": "Askara Tech"
+    },
+    {
+      "name": "Indosat Collabonation",
       "tags": "NuxtJS, Vue, Tailwind, CSS3, REST API",
       "external_url": "",
       "description": "",
@@ -8,8 +68,9 @@
       "highlight": false,
       "client": "SAGA",
       "made_at": ""
-    }, {
-      "name": "Paragon CSR Phase 2", 
+    },
+    {
+      "name": "Paragon CSR Phase 2",
       "tags": "Javascript, NextJS, React, CSS3, Tailwind, REST API",
       "external_url": "",
       "description": "",
@@ -17,8 +78,9 @@
       "highlight": false,
       "client": "SAGA",
       "made_at": ""
-    }, {
-      "name": "OCBC Phase 5", 
+    },
+    {
+      "name": "OCBC Phase 5",
       "tags": "Javascript, Alpine JS, Tailwind, CSS3, REST API",
       "external_url": "",
       "description": "",
@@ -26,8 +88,9 @@
       "highlight": false,
       "client": "SAGA",
       "made_at": ""
-    }, {
-      "name": "Gagasan Pemuda", 
+    },
+    {
+      "name": "Gagasan Pemuda",
       "tags": "NuxtJS, Vue, Tailwind, CSS3, REST API",
       "external_url": "",
       "description": "",
@@ -35,8 +98,9 @@
       "highlight": false,
       "client": "Gagasan Pemuda",
       "made_at": "FAS"
-    }, {
-      "name": "CUiT", 
+    },
+    {
+      "name": "CUiT",
       "tags": "NuxtJS, Vue, Tailwind, CSS3, REST API",
       "external_url": "",
       "description": "",
@@ -44,8 +108,9 @@
       "highlight": true,
       "client": "Komune",
       "made_at": "FAS"
-    }, {
-      "name": "Ideafest 2023", 
+    },
+    {
+      "name": "Ideafest 2023",
       "tags": "NextJS, React, TypeScript, CSS3, REST API",
       "external_url": "https://ideafest.id",
       "description": "",
@@ -53,8 +118,9 @@
       "highlight": true,
       "client": "Ideafest",
       "made_at": "FAS"
-    }, {
-      "name": "ICEPERIENCE 2023", 
+    },
+    {
+      "name": "ICEPERIENCE 2023",
       "tags": "Laravel, CSS3, jQuery",
       "external_url": "https://iceperience.id",
       "description": "",
@@ -62,17 +128,19 @@
       "highlight": false,
       "client": "SAGA",
       "made_at": ""
-    }, {
-      "name": "Pina Advice Board", 
+    },
+    {
+      "name": "Pina Advice Board",
       "tags": "NextJS, Tailwind, Javascript, REST API",
       "external_url": "",
       "description": "",
       "year": "2023",
-      "highlight": false,
+      "highlight": true,
       "client": "nvizionlab",
       "made_at": ""
-    }, {
-      "name": "YOUN1T", 
+    },
+    {
+      "name": "YOUN1T",
       "tags": "Laravel, CSS3, jQuery",
       "external_url": "https://youn1t.com",
       "description": "",
@@ -80,8 +148,9 @@
       "highlight": false,
       "client": "1D Music",
       "made_at": "FAS"
-    }, {
-      "name": "Allstars Influencer", 
+    },
+    {
+      "name": "Allstars Influencer",
       "tags": "Laravel, CSS3, jQuery",
       "external_url": "https://www.allstars.id",
       "description": "",
@@ -89,8 +158,9 @@
       "highlight": true,
       "client": "Inhouse",
       "made_at": "FAS"
-    }, {
-      "name": "ICEPERIENCE 2021", 
+    },
+    {
+      "name": "ICEPERIENCE 2021",
       "tags": "Laravel, CSS3, jQuery",
       "external_url": "https://iceperience.id",
       "description": "",
@@ -98,8 +168,9 @@
       "highlight": false,
       "client": "SAGA",
       "made_at": ""
-    }, {
-      "name": "Lactogrow Brand Site Revamp", 
+    },
+    {
+      "name": "Lactogrow Brand Site Revamp",
       "tags": "Drupal, CSS3, jQuery",
       "external_url": "https://www.lactoclub.co.id",
       "description": "",
@@ -107,8 +178,9 @@
       "highlight": false,
       "client": "Lactogrow",
       "made_at": "Wunderman Thompson Indonesia"
-    }, {
-      "name": "Majelis Lucu Indonesia Enhancement", 
+    },
+    {
+      "name": "Majelis Lucu Indonesia Enhancement",
       "tags": "Laravel, CSS3, jQuery",
       "external_url": "https://www.majelislucuindonesia.com",
       "description": "",
@@ -116,8 +188,9 @@
       "highlight": false,
       "client": "SAGA",
       "made_at": ""
-    }, {
-      "name": "Universitas Pelita Harapan", 
+    },
+    {
+      "name": "Universitas Pelita Harapan",
       "tags": "Wordpress, WP Bakery, CSS3, PHP, jQuery",
       "external_url": "https://www.uph.edu",
       "description": "",
@@ -125,17 +198,19 @@
       "highlight": true,
       "client": "UPH",
       "made_at": "Wunderman Thompson Indonesia"
-    }, {
-      "name": "Changi Power Up Game", 
+    },
+    {
+      "name": "Changi Power Up Game",
       "tags": "Babylon.js, Javascript, CSS3, jQuery",
       "external_url": "",
       "description": "",
       "year": "2020",
-      "highlight": true,
+      "highlight": false,
       "client": "Changi Airport",
       "made_at": "Wunderman Thompson Indonesia"
-    }, {
-      "name": "Traveloka Career", 
+    },
+    {
+      "name": "Traveloka Career",
       "tags": "Strapi, CSS3, Javascript",
       "external_url": "https://www.traveloka.com/en-id/careers",
       "description": "",
@@ -143,8 +218,9 @@
       "highlight": true,
       "client": "Traveloka",
       "made_at": "Wunderman Thompson Indonesia"
-    }, {
-      "name": "Shell Electronic Direct Mail", 
+    },
+    {
+      "name": "Shell Electronic Direct Mail",
       "tags": "Foundation, CSS",
       "external_url": "",
       "description": "",
@@ -152,8 +228,9 @@
       "highlight": false,
       "client": "Shell",
       "made_at": "Wunderman Thompson Indonesia"
-    }, {
-      "name": "NU K-RAZY 127", 
+    },
+    {
+      "name": "NU K-RAZY 127",
       "tags": "Babylon.js, Javascript, Laravel, CSS3, jQuery",
       "external_url": "https://nutea.co.id",
       "description": "",
@@ -161,8 +238,9 @@
       "highlight": true,
       "client": "Nutea",
       "made_at": "Wunderman Thompson Indonesia"
-    }, {
-      "name": "Dancow Brand Site", 
+    },
+    {
+      "name": "Dancow Brand Site",
       "tags": "Drupal, CSS3, jQuery",
       "external_url": "https://www.dancow.co.id",
       "description": "",
@@ -170,8 +248,9 @@
       "highlight": true,
       "client": "Dancow",
       "made_at": "Wunderman Thompson Indonesia"
-    }, {
-      "name": "Opera #DaripadaNunggu", 
+    },
+    {
+      "name": "Opera #DaripadaNunggu",
       "tags": "Laravel, CSS3, jQuery",
       "external_url": "https://www.daripadanunggu.com",
       "description": "",
@@ -179,8 +258,9 @@
       "highlight": false,
       "client": "Opera Indonesia",
       "made_at": "Mirum Agency"
-    }, {
-      "name": "Walls My Magnum", 
+    },
+    {
+      "name": "Walls My Magnum",
       "tags": "Laravel, CSS3, jQuery",
       "external_url": "https://web.archive.org/web/20160306111822/http://www.mymagnum.co.id/",
       "description": "",
@@ -188,8 +268,9 @@
       "highlight": false,
       "client": "Walls",
       "made_at": "Mirum Agency"
-    }, {
-      "name": "Burger King Indonesia", 
+    },
+    {
+      "name": "Burger King Indonesia",
       "tags": "Laravel, CSS3, jQuery",
       "external_url": "https://web.archive.org/web/20160116230057/http://www.burgerking.id/",
       "description": "",
@@ -197,8 +278,9 @@
       "highlight": false,
       "client": "Burger King",
       "made_at": "Mirum Agency"
-    }, {
-      "name": "Malboro Neuland", 
+    },
+    {
+      "name": "Malboro Neuland",
       "tags": "Laravel, CSS3, jQuery",
       "external_url": "",
       "description": "",
@@ -206,8 +288,9 @@
       "highlight": false,
       "client": "Philip Morris",
       "made_at": "Mirum Agency"
-    }, {
-      "name": "Buavita Brand Site", 
+    },
+    {
+      "name": "Buavita Brand Site",
       "tags": "Code Igniter, CSS3, jQuery",
       "external_url": "https://www.buavita.co.id",
       "description": "",
@@ -215,8 +298,9 @@
       "highlight": false,
       "client": "Buavita",
       "made_at": "Mirum Agency"
-    }, {
-      "name": "Kanaya Food", 
+    },
+    {
+      "name": "Kanaya Food",
       "tags": "Wordpress, PHP, CSS3, jQuery",
       "external_url": "https://www.kanayafood.com",
       "description": "",
@@ -224,8 +308,9 @@
       "highlight": false,
       "client": "Inhouse",
       "made_at": "ValueStream International"
-    }, {
-      "name": "BMT Amanah Bersama", 
+    },
+    {
+      "name": "BMT Amanah Bersama",
       "tags": "Wordpress, PHP, CSS3, jQuery",
       "external_url": "https://bmtamber.co.id",
       "description": "",
@@ -233,8 +318,9 @@
       "highlight": false,
       "client": "Inhouse",
       "made_at": "ValueStream International"
-    }, {
-      "name": "MandiriPay", 
+    },
+    {
+      "name": "MandiriPay",
       "tags": "Wordpress, PHP, CSS3, jQuery",
       "external_url": "",
       "description": "",
@@ -243,4 +329,4 @@
       "client": "Inhouse",
       "made_at": "ValueStream International"
     }
-  ]
+]
