@@ -59,14 +59,14 @@ function parsePageParams(query: Request['query']): { page: number, size: number 
 app.use(bodyParser.json());
 
 // CORS
-app.use((req, res, next) => {
+app.use((_req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
 
@@ -106,8 +106,21 @@ app.get('/api/portfolio', async (req: Request, res: Response) => {
   }
 });
 
+// GET /api/portfolio/highlights?page=1&size=10
+app.get('/api/portfolio/highlights', async (req: Request, res: Response) => {
+  try {
+    const fileContent = await fs.readFile(path.join(process.cwd(), '/data/portfolio.json'), 'utf8');
+    const data: Portfolio[] = (JSON.parse(fileContent) as Portfolio[]).filter(p => p.highlight);
+
+    const { page, size } = parsePageParams(req.query);
+    res.status(200).json(paginate(data, page, size));
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to load portfolio data' });
+  }
+});
+
 // GET /api/site — no pagination, single config object
-app.get('/api/site', async (req: Request, res: Response) => {
+app.get('/api/site', async (_req: Request, res: Response) => {
   try {
     const fileContent = await fs.readFile(path.join(process.cwd(), '/data/site.json'), 'utf8');
     const siteData = JSON.parse(fileContent);

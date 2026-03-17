@@ -37,13 +37,13 @@ function parsePageParams(query) {
 }
 app.use(body_parser_1.default.json());
 // CORS
-app.use((req, res, next) => {
+app.use((_req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, PUT');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
     res.send("Express + TypeScript Server");
 });
 // GET /api/works?page=1&size=10&title=developer&company_name=BNI
@@ -84,8 +84,20 @@ app.get('/api/portfolio', (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(500).json({ error: 'Failed to load portfolio data' });
     }
 }));
+// GET /api/portfolio/highlights?page=1&size=10
+app.get('/api/portfolio/highlights', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const fileContent = yield promises_1.default.readFile(path_1.default.join(process.cwd(), '/data/portfolio.json'), 'utf8');
+        const data = JSON.parse(fileContent).filter(p => p.highlight);
+        const { page, size } = parsePageParams(req.query);
+        res.status(200).json(paginate(data, page, size));
+    }
+    catch (err) {
+        res.status(500).json({ error: 'Failed to load portfolio data' });
+    }
+}));
 // GET /api/site — no pagination, single config object
-app.get('/api/site', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/api/site', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const fileContent = yield promises_1.default.readFile(path_1.default.join(process.cwd(), '/data/site.json'), 'utf8');
         const siteData = JSON.parse(fileContent);
