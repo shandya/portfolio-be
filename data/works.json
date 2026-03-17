@@ -1,29 +1,37 @@
 [
   {
+    "title": "Frontend Engineer",
+    "company_name": "Sobat Bisnis Group",
+    "location": "Jakarta, Indonesia",
+    "time": "2025 - Present",
+    "job_desc": "<ul><li>Developing and maintaining internal and client web applications using React and Angular.</li><li>Collaborating closely with Backend, QA, CX, and BA teams to align on requirements, validate features, and ensure smooth end-to-end delivery.</li><li>Translating UI/UX designs into responsive, accessible, and performant web interfaces.</li><li>Participating in code reviews and contributing to technical discussions to maintain code quality across projects.</li></ul>"
+  },
+  {
     "title": "React Developer",
     "company_name": "BNI Sekuritas",
     "location": "Jakarta, Indonesia",
-    "time": "2024 - Present",
+    "time": "2024 - 2025",
     "job_desc": "<ul><li>Building and maintaining Middle Office CMS modules for the company mobile app using React.js.</li><li>Developing and integrating micro-frontend architecture using Module Federations to decouple features into independently deployable modules.</li><li>Working closely with with Backend, QA, and Business Analyst teams to align requirements, validate features, and smooth integration across middle office and front end app.</li></ul>"
   },
-  { 
-    "title": "Sr. Front End Developer", 
+  {
+    "title": "Sr. Front End Developer",
     "company_name": "Famous Allstars",
     "location": "Jakarta, Indonesia",
     "time": "2021 - 2024",
     "job_desc": "<ul><li>Working closely with BE engineers to develop both in-house and clients' web applications or websites.</li><li>Providing guidance and troubleshooting for our team on FE related issues.</li><li>Maintaining and updating internal platforms to meet the business needs.</li><li>Code reviewing & testing staff's work</li></ul>"
   },
-  { 
-    "title": "Front End Developer", 
+  {
+    "title": "Front End Developer",
     "company_name": "Wunderman Thompson Indonesia (formerly Mirum Agency)",
     "location": "Jakarta, Indonesia",
     "time": "2015 - 2021",
     "job_desc": "<ul><li>Bringing our clients' website designs to life using HTML, CSS & JavaScript and its frameworks.</li><li>Monitoring clients' websites to ensure they are working as expected during campaign.</li><li>Recommending solutions for a streamlined, responsive interface with the design team.</li><li>Communicating technical issues in an understandable manner to our internal team</li></ul>"
   },
-  { 
-    "title": "Web Designer & Developer", 
+  {
+    "title": "Web Designer & Developer",
     "company_name": "PT ValueStream International",
     "location": "Bandung, Indonesia",
     "time": "2012 - 2015",
     "job_desc": "<ul><li>Creating and maintaining CMS-based company profile & product websites.</li><li>Designing prototype and user interface for our client's mobile apps.</li><li>Designing catalogs, banners, logos, and other printed materials for promotions and advertisements</li></ul>"
-  }]
+  }
+]
