@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npm run build)",
       "Bash(./node_modules/.bin/tsc)",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(xargs grep -l \"axios\\\\|fetch\\\\|swr\\\\|react-query\\\\|useQuery\")",
+      "Bash(xargs grep -l \"next-auth\\\\|auth\\\\|nextAuth\")"
     ]
   }
 }
