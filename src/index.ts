@@ -1,32 +1,13 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import fs from 'node:fs/promises';
 import bodyParser from 'body-parser';
-import path from 'path';
+import { neon } from '@neondatabase/serverless';
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
-
-interface Works {
-  title: string,
-  company_name: string,
-  location: string,
-  time: string,
-  job_desc: string
-}
-
-interface Portfolio {
-  name: string,
-  tags: string,
-  external_url: string,
-  description: string,
-  year: string,
-  highlight: boolean,
-  client: string,
-  made_at: string
-}
+const sql = neon(process.env.DATABASE_URL!);
 
 interface PaginatedResponse<T> {
   data: T[],
@@ -38,16 +19,9 @@ interface PaginatedResponse<T> {
   }
 }
 
-function paginate<T>(items: T[], page: number, size: number): PaginatedResponse<T> {
-  const totalItems = items.length;
-  const totalPages = Math.ceil(totalItems / size);
-  const currentPage = Math.min(Math.max(page, 1), totalPages || 1);
-  const data = items.slice((currentPage - 1) * size, currentPage * size);
-
-  return {
-    data,
-    meta: { currentPage, size, totalItems, totalPages }
-  };
+function buildMeta(page: number, size: number, total: number): PaginatedResponse<never>['meta'] {
+  const totalPages = Math.ceil(total / size) || 1;
+  return { currentPage: Math.min(Math.max(page, 1), totalPages), size, totalItems: total, totalPages };
 }
 
 function parsePageParams(query: Request['query']): { page: number, size: number } {
@@ -73,15 +47,23 @@ app.get("/", (_req: Request, res: Response) => {
 // GET /api/works?page=1&size=10&title=developer&company_name=BNI
 app.get('/api/works', async (req: Request, res: Response) => {
   try {
-    const fileContent = await fs.readFile(path.join(process.cwd(), '/data/works.json'), 'utf8');
-    let data: Works[] = JSON.parse(fileContent);
-
     const { title, company_name } = req.query;
-    if (title) data = data.filter(w => w.title.toLowerCase().includes((title as string).toLowerCase()));
-    if (company_name) data = data.filter(w => w.company_name.toLowerCase().includes((company_name as string).toLowerCase()));
-
     const { page, size } = parsePageParams(req.query);
-    res.status(200).json(paginate(data, page, size));
+    const offset = (page - 1) * size;
+
+    const titleParam = title ? `%${title}%` : '%';
+    const companyParam = company_name ? `%${company_name}%` : '%';
+
+    const [rows, countRows] = await Promise.all([
+      sql`SELECT title, company_name, location, time, job_desc FROM works
+          WHERE title ILIKE ${titleParam} AND company_name ILIKE ${companyParam}
+          ORDER BY id ASC LIMIT ${size} OFFSET ${offset}`,
+      sql`SELECT COUNT(*)::int AS total FROM works
+          WHERE title ILIKE ${titleParam} AND company_name ILIKE ${companyParam}`
+    ]);
+
+    const total = (countRows[0] as { total: number }).total;
+    res.status(200).json({ data: rows, meta: buildMeta(page, size, total) });
   } catch (err) {
     res.status(500).json({ error: 'Failed to load works data' });
   }
@@ -90,17 +72,29 @@ app.get('/api/works', async (req: Request, res: Response) => {
 // GET /api/portfolio?page=1&size=10&highlight=true&year=2024&client=BNI&tags=React
 app.get('/api/portfolio', async (req: Request, res: Response) => {
   try {
-    const fileContent = await fs.readFile(path.join(process.cwd(), '/data/portfolio.json'), 'utf8');
-    let data: Portfolio[] = JSON.parse(fileContent);
-
     const { highlight, year, client, tags } = req.query;
-    if (highlight !== undefined) data = data.filter(p => p.highlight === (highlight === 'true'));
-    if (year) data = data.filter(p => p.year.includes(year as string));
-    if (client) data = data.filter(p => p.client.toLowerCase().includes((client as string).toLowerCase()));
-    if (tags) data = data.filter(p => p.tags.toLowerCase().includes((tags as string).toLowerCase()));
-
     const { page, size } = parsePageParams(req.query);
-    res.status(200).json(paginate(data, page, size));
+    const offset = (page - 1) * size;
+
+    const yearParam = year ? `%${year}%` : '%';
+    const clientParam = client ? `%${client}%` : '%';
+    const tagsParam = tags ? `%${tags}%` : '%';
+    const highlightFilter = highlight !== undefined
+      ? sql`AND highlight = ${highlight === 'true'}`
+      : sql``;
+
+    const [rows, countRows] = await Promise.all([
+      sql`SELECT name, tags, external_url, description, year, highlight, client, made_at FROM portfolio
+          WHERE year ILIKE ${yearParam} AND client ILIKE ${clientParam} AND tags ILIKE ${tagsParam}
+          ${highlightFilter}
+          ORDER BY id ASC LIMIT ${size} OFFSET ${offset}`,
+      sql`SELECT COUNT(*)::int AS total FROM portfolio
+          WHERE year ILIKE ${yearParam} AND client ILIKE ${clientParam} AND tags ILIKE ${tagsParam}
+          ${highlightFilter}`
+    ]);
+
+    const total = (countRows[0] as { total: number }).total;
+    res.status(200).json({ data: rows, meta: buildMeta(page, size, total) });
   } catch (err) {
     res.status(500).json({ error: 'Failed to load portfolio data' });
   }
@@ -109,22 +103,27 @@ app.get('/api/portfolio', async (req: Request, res: Response) => {
 // GET /api/portfolio/highlights?page=1&size=10
 app.get('/api/portfolio/highlights', async (req: Request, res: Response) => {
   try {
-    const fileContent = await fs.readFile(path.join(process.cwd(), '/data/portfolio.json'), 'utf8');
-    const data: Portfolio[] = (JSON.parse(fileContent) as Portfolio[]).filter(p => p.highlight);
-
     const { page, size } = parsePageParams(req.query);
-    res.status(200).json(paginate(data, page, size));
+    const offset = (page - 1) * size;
+
+    const [rows, countRows] = await Promise.all([
+      sql`SELECT name, tags, external_url, description, year, highlight, client, made_at FROM portfolio
+          WHERE highlight = true ORDER BY id ASC LIMIT ${size} OFFSET ${offset}`,
+      sql`SELECT COUNT(*)::int AS total FROM portfolio WHERE highlight = true`
+    ]);
+
+    const total = (countRows[0] as { total: number }).total;
+    res.status(200).json({ data: rows, meta: buildMeta(page, size, total) });
   } catch (err) {
     res.status(500).json({ error: 'Failed to load portfolio data' });
   }
 });
 
-// GET /api/site — no pagination, single config object
+// GET /api/site
 app.get('/api/site', async (_req: Request, res: Response) => {
   try {
-    const fileContent = await fs.readFile(path.join(process.cwd(), '/data/site.json'), 'utf8');
-    const siteData = JSON.parse(fileContent);
-    res.status(200).json({ data: siteData });
+    const rows = await sql`SELECT description FROM site`;
+    res.status(200).json({ data: rows });
   } catch (err) {
     res.status(500).json({ error: 'Failed to load site data' });
   }
