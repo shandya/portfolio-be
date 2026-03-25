@@ -23,7 +23,7 @@ router.get('/', async (req: Request, res: Response) => {
       sql`SELECT id, name, tags, external_url, description, year, highlight, client, made_at FROM portfolio
           WHERE year ILIKE ${yearParam} AND client ILIKE ${clientParam} AND tags ILIKE ${tagsParam}
           ${highlightFilter}
-          ORDER BY id ASC LIMIT ${size} OFFSET ${offset}`,
+          ORDER BY sort_order ASC, id ASC LIMIT ${size} OFFSET ${offset}`,
       sql`SELECT COUNT(*)::int AS total FROM portfolio
           WHERE year ILIKE ${yearParam} AND client ILIKE ${clientParam} AND tags ILIKE ${tagsParam}
           ${highlightFilter}`
@@ -44,7 +44,7 @@ router.get('/highlights', async (req: Request, res: Response) => {
 
     const [rows, countRows] = await Promise.all([
       sql`SELECT id, name, tags, external_url, description, year, highlight, client, made_at FROM portfolio
-          WHERE highlight = true ORDER BY id ASC LIMIT ${size} OFFSET ${offset}`,
+          WHERE highlight = true ORDER BY sort_order ASC, id ASC LIMIT ${size} OFFSET ${offset}`,
       sql`SELECT COUNT(*)::int AS total FROM portfolio WHERE highlight = true`
     ]);
 
@@ -67,6 +67,23 @@ router.post('/', requireAuth, async (req: Request, res: Response) => {
     res.status(201).json({ data: rows[0] });
   } catch (err) {
     res.status(500).json({ error: 'Failed to create portfolio item' });
+  }
+});
+
+// PATCH /api/portfolio/reorder  — must be before PUT /:id
+router.patch('/reorder', requireAuth, async (req: Request, res: Response) => {
+  try {
+    const { ids } = req.body as { ids: number[] };
+    if (!Array.isArray(ids) || ids.length === 0) {
+      res.status(400).json({ error: 'ids array is required' }); return;
+    }
+    const values = ids.map((id, index) => `(${Number(id)}, ${index})`).join(', ');
+    await sql.unsafe(
+      `UPDATE portfolio p SET sort_order = c.sort_order FROM (VALUES ${values}) AS c(id, sort_order) WHERE p.id = c.id`
+    );
+    res.status(200).json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to reorder portfolio' });
   }
 });
 

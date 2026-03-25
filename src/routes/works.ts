@@ -18,7 +18,7 @@ router.get('/', async (req: Request, res: Response) => {
     const [rows, countRows] = await Promise.all([
       sql`SELECT id, title, company_name, location, time, job_desc FROM works
           WHERE title ILIKE ${titleParam} AND company_name ILIKE ${companyParam}
-          ORDER BY id ASC LIMIT ${size} OFFSET ${offset}`,
+          ORDER BY sort_order ASC, id ASC LIMIT ${size} OFFSET ${offset}`,
       sql`SELECT COUNT(*)::int AS total FROM works
           WHERE title ILIKE ${titleParam} AND company_name ILIKE ${companyParam}`
     ]);
@@ -42,6 +42,23 @@ router.post('/', requireAuth, async (req: Request, res: Response) => {
     res.status(201).json({ data: rows[0] });
   } catch (err) {
     res.status(500).json({ error: 'Failed to create work item' });
+  }
+});
+
+// PATCH /api/works/reorder  — must be before PUT /:id
+router.patch('/reorder', requireAuth, async (req: Request, res: Response) => {
+  try {
+    const { ids } = req.body as { ids: number[] };
+    if (!Array.isArray(ids) || ids.length === 0) {
+      res.status(400).json({ error: 'ids array is required' }); return;
+    }
+    const values = ids.map((id, index) => `(${Number(id)}, ${index})`).join(', ');
+    await sql.unsafe(
+      `UPDATE works w SET sort_order = c.sort_order FROM (VALUES ${values}) AS c(id, sort_order) WHERE w.id = c.id`
+    );
+    res.status(200).json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to reorder works' });
   }
 });
 

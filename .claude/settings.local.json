@@ -5,7 +5,8 @@
       "Bash(./node_modules/.bin/tsc)",
       "Bash(npm install)",
       "Bash(xargs grep -l \"axios\\\\|fetch\\\\|swr\\\\|react-query\\\\|useQuery\")",
-      "Bash(xargs grep -l \"next-auth\\\\|auth\\\\|nextAuth\")"
+      "Bash(xargs grep -l \"next-auth\\\\|auth\\\\|nextAuth\")",
+      "Bash(npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities)"
     ]
   }
 }
