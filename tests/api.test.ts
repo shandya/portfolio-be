@@ -55,6 +55,13 @@ describe('cors', () => {
     expect(bad.headers['access-control-allow-origin']).toBeUndefined();
   });
 
+  it('also accepts the www / bare-domain twin of a configured origin, echoing the request origin', async () => {
+    const twin = await request(app).get('/api/site').set('Origin', 'https://www.allowed.example');
+    expect(twin.headers['access-control-allow-origin']).toBe('https://www.allowed.example');
+    const lookalike = await request(app).get('/').set('Origin', 'https://allowed.example.evil.test');
+    expect(lookalike.headers['access-control-allow-origin']).toBeUndefined();
+  });
+
   it('returns JSON 404 for unknown routes', async () => {
     await request(app).get('/nope').expect(404);
   });

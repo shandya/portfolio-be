@@ -3,6 +3,7 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { dbConfigured } from './lib/db';
+import { parseOrigins } from './lib/cors';
 import portfolioRouter from './routes/portfolio';
 import worksRouter from './routes/works';
 import siteRouter from './routes/site';
@@ -13,10 +14,8 @@ const port = process.env.PORT || 3000;
 
 // In development, fall back to the local Next.js dev server so the browser can reach the API
 const defaultOrigins = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000';
-const allowedOrigins = (process.env.CORS_ORIGINS ?? defaultOrigins)
-  .split(',')
-  .map((o) => o.trim())
-  .filter(Boolean);
+// Each origin also accepts its www / bare-domain twin (see lib/cors.ts)
+const allowedOrigins = parseOrigins(process.env.CORS_ORIGINS ?? defaultOrigins);
 
 // Public read API: let browsers on other origins (see CORS below) consume responses
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
