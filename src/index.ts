@@ -12,6 +12,11 @@ import postsRouter from './routes/posts';
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
+// No ETags -> no 304 responses. Vercel's edge strips Access-Control-* headers from 304s, so a browser
+// holding a cached copy saved without them (e.g. from before an origin was allowed) could never
+// recover: it kept revalidating, got a 304 with no CORS header, and failed the CORS check forever.
+app.set('etag', false);
+
 // In development, fall back to the local Next.js dev server so the browser can reach the API
 const defaultOrigins = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000';
 // Each origin also accepts its www / bare-domain twin (see lib/cors.ts)

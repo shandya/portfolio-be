@@ -62,6 +62,17 @@ describe('cors', () => {
     expect(lookalike.headers['access-control-allow-origin']).toBeUndefined();
   });
 
+  it('never answers 304, so every response carries its CORS headers', async () => {
+    const first = await request(app).get('/api/site').set('Origin', 'https://allowed.example');
+    expect(first.headers.etag).toBeUndefined();
+    const revalidated = await request(app)
+      .get('/api/site')
+      .set('Origin', 'https://allowed.example')
+      .set('If-None-Match', 'W/"stale-etag"');
+    expect(revalidated.status).toBe(200);
+    expect(revalidated.headers['access-control-allow-origin']).toBe('https://allowed.example');
+  });
+
   it('returns JSON 404 for unknown routes', async () => {
     await request(app).get('/nope').expect(404);
   });
