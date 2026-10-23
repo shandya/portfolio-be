@@ -4,6 +4,7 @@ import request from 'supertest';
 const sqlMock = vi.hoisted(() => vi.fn(async (..._args: unknown[]): Promise<unknown[]> => []));
 
 vi.mock('../src/lib/db', () => ({
+  dbConfigured: true,
   sql: Object.assign(sqlMock, { unsafe: vi.fn() }),
 }));
 

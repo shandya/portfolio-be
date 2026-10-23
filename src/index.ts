@@ -2,6 +2,7 @@ import "dotenv/config";
 import express, { Express, Request, Response, NextFunction } from "express";
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import { dbConfigured } from './lib/db';
 import portfolioRouter from './routes/portfolio';
 import worksRouter from './routes/works';
 import siteRouter from './routes/site';
@@ -43,6 +44,14 @@ app.use(rateLimit({ windowMs: 60_000, limit: 120, standardHeaders: true, legacyH
 
 app.get("/", (_req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
+});
+
+app.use('/api', (_req: Request, res: Response, next: NextFunction) => {
+  if (!dbConfigured) {
+    res.status(503).json({ error: 'Database is not configured (DATABASE_URL is missing)' });
+    return;
+  }
+  next();
 });
 
 app.use('/api/portfolio', portfolioRouter);

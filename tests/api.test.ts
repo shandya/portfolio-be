@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeAll } from 'vitest';
 import request from 'supertest';
 
 vi.mock('../src/lib/db', () => ({
+  dbConfigured: true,
   sql: Object.assign(vi.fn(async () => []), { unsafe: vi.fn() }),
 }));
 
