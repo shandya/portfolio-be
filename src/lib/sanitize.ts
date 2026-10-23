@@ -7,3 +7,15 @@ const options: sanitizeHtml.IOptions = {
 };
 
 export const cleanHtml = (html: string): string => sanitizeHtml(html, options);
+
+// Blog posts additionally allow h2 and links (http/https/mailto only, always rel="noopener noreferrer").
+const postOptions: sanitizeHtml.IOptions = {
+  allowedTags: [...(options.allowedTags as string[]), 'h2', 'a'],
+  allowedAttributes: { a: ['href', 'target', 'rel'] },
+  allowedSchemes: ['http', 'https', 'mailto'],
+  transformTags: {
+    a: sanitizeHtml.simpleTransform('a', { rel: 'noopener noreferrer' }),
+  },
+};
+
+export const cleanPostHtml = (html: string): string => sanitizeHtml(html, postOptions);

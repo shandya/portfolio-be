@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit';
 import portfolioRouter from './routes/portfolio';
 import worksRouter from './routes/works';
 import siteRouter from './routes/site';
+import postsRouter from './routes/posts';
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
@@ -18,7 +19,7 @@ const allowedOrigins = (process.env.CORS_ORIGINS ?? defaultOrigins)
 
 // Public read API: let browsers on other origins (see CORS below) consume responses
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
-app.use(express.json({ limit: '100kb' }));
+app.use(express.json({ limit: '1mb' })); // blog posts can be long
 
 // CORS: restricted to CORS_ORIGINS (comma-separated). Unset = no cross-origin browser access.
 app.use((req, res, next) => {
@@ -47,6 +48,7 @@ app.get("/", (_req: Request, res: Response) => {
 app.use('/api/portfolio', portfolioRouter);
 app.use('/api/works', worksRouter);
 app.use('/api/site', siteRouter);
+app.use('/api/posts', postsRouter);
 
 app.use((_req: Request, res: Response) => {
   res.status(404).json({ error: 'Not found' });

@@ -25,3 +25,7 @@ Reads are public; writes need `Authorization: Bearer <ADMIN_API_KEY>`. Bodies ar
 | POST / PUT / PATCH / DELETE | `/api/works[/:id]` | auth; PATCH updates only the fields sent |
 | PATCH | `/api/works/reorder` | auth |
 | GET | `/api/site` | |
+| GET | `/api/posts` | published only; `page, size, tag, q`; no `content` |
+| GET | `/api/posts/slug/:slug` | single published post, 404 for drafts |
+| GET | `/api/posts/admin` | auth; all posts including drafts |
+| POST / PUT / PATCH / DELETE | `/api/posts[/:id]` | auth; slug auto-generated from title when blank, 409 if taken |
